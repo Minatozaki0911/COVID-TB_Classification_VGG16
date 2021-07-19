@@ -60,7 +60,6 @@ if __name__ =="__main__":
     dataset = {'Name':[], 'Dimension':[]}
     for image in fileRead(directory): 
         if image.endswith('.png') or image.endswith('jpg'):
-            print(image)
 
             resizedImg, dimension  = imageResize(os.path.join(path, image), scale)
             fileWrite(dest, image, resizedImg)
@@ -72,7 +71,5 @@ if __name__ =="__main__":
     dataframe = pd.DataFrame.from_dict(dataset)
     dataframe.to_excel(excelWriter, index = False)
     excelWriter.save()
-
-
 
     print("Operation Completed")
