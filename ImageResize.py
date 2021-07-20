@@ -31,7 +31,7 @@ def fileWrite(directory, imageName, inputImg):
         pass
 
     size = str(inputImg.shape[1]) + 'x' + str(inputImg.shape[0])
-    resizedImgName = str(imageName) + "_" + size + ".png"
+    resizedImgName = (str(imageName)[:-4] + "_" + size) + ".png" 
     pwd = os.getcwd()
     os.chdir(path)
     cv2.imwrite(resizedImgName, inputImg)
@@ -54,22 +54,28 @@ if __name__ =="__main__":
     directory = args["input"]
     dest = args["output"]
     scale = args["scale"]
-    
+
     path = os.path.join(home, directory)
 
     dataset = {'Name':[], 'Dimension':[]}
-    for image in fileRead(directory): 
-        if image.endswith('.png') or image.endswith('jpg'):
+    allFiles = sorted(os.listdir(path), key=lambda a: int(''.join(s for s in a if s.isdigit())))
+    print(allFiles)
+    for image in allFiles: 
+        if image[-4:] in ['.jpg', 'png']: 
 
             resizedImg, dimension  = imageResize(os.path.join(path, image), scale)
             fileWrite(dest, image, resizedImg)
+            print("imwrite"+image)
 
             dataset['Name'].append(image)
             dataset['Dimension'].append(dimension)
     
-    excelWriter = pd.ExcelWriter('DatasetInfo.xlsx',engine='xlsxwriter')
+
+    excelFileName = str(path).split("/")[-2] + "_DatasetInfo.xlsx"
+    excelWriter = pd.ExcelWriter(excelFileName, engine='xlsxwriter')
     dataframe = pd.DataFrame.from_dict(dataset)
     dataframe.to_excel(excelWriter, index = False)
     excelWriter.save()
+    print("Excel File Saved at current directory")
 
     print("Operation Completed")
