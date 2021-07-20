@@ -61,7 +61,7 @@ if __name__ =="__main__":
     allFiles = sorted(os.listdir(path), key=lambda a: int(''.join(s for s in a if s.isdigit())))
     print(allFiles)
     for image in allFiles: 
-        if image[-4:] in ['.jpg', 'png']: 
+        if image[-4:] in ['.jpg', '.png']: 
 
             resizedImg, dimension  = imageResize(os.path.join(path, image), scale)
             fileWrite(dest, image, resizedImg)
