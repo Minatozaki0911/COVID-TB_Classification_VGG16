@@ -47,9 +47,8 @@ def imageResize(img, scale):
     resizedImg = cv2.resize(grayImg, (widthScaled, heightScaled), interpolation = cv2.INTER_AREA)
     return resizedImg, (width, height)
 
+def main():
 
-if __name__ =="__main__":
-    
     CLIinit()
     directory = args["input"]
     dest = args["output"]
@@ -58,24 +57,28 @@ if __name__ =="__main__":
     path = os.path.join(home, directory)
 
     dataset = {'Name':[], 'Dimension':[]}
+
     allFiles = sorted(os.listdir(path), key=lambda a: int(''.join(s for s in a if s.isdigit())))
-    print(allFiles)
     for image in allFiles: 
         if image[-4:] in ['.jpg', '.png']: 
-
             resizedImg, dimension  = imageResize(os.path.join(path, image), scale)
             fileWrite(dest, image, resizedImg)
-            print("imwrite"+image)
 
             dataset['Name'].append(image)
             dataset['Dimension'].append(dimension)
     
-
-    excelFileName = str(path).split("/")[-2] + "_DatasetInfo.xlsx"
+    print("Write completed")
+    if str(path).split("/")[-1] is not str(""):
+        excelFileName = str(path).split("/")[-1] + "_DatasetInfo.xlsx"
+    else:
+        excelFileName = str(path).split("/")[-2] + "_DatasetInfo.xlsx"
     excelWriter = pd.ExcelWriter(excelFileName, engine='xlsxwriter')
     dataframe = pd.DataFrame.from_dict(dataset)
     dataframe.to_excel(excelWriter, index = False)
     excelWriter.save()
-    print("Excel File Saved at current directory")
+    print(excelFileName + " saved at current directory")
 
     print("Operation Completed")
+
+if __name__ =="__main__":
+   main() 
