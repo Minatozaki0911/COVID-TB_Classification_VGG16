@@ -43,3 +43,7 @@ python ResizeImage.py -i <YOUR/INPUT/DIRECTORY/PATH> -o <YOUR/INPUT/DIRECTORY/PA
 My COVID_VGG16.ipynb file may already has my run history as well as hyperparameters, model parameters and architecture. <br>
 Change test_path to your directory contain image you want to test. <br>
 Ctrl F9 will run all codeblock. 
+![image](https://user-images.githubusercontent.com/48411041/127437184-6295ad0b-a85a-40fe-a747-39e9014b72dd.png)
+
+![image](https://user-images.githubusercontent.com/48411041/127437164-832a074d-756d-4af7-9964-082987547f25.png)
+
