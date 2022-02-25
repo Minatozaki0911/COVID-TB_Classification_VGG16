@@ -1,7 +1,7 @@
 # Summer Intern Project Semester 203
 ### Thuc Tap Tot Nghiep He HK203
 
-Medical Image Classify Desktop Application (COVID patient's CT scan) </br>
+Medical Image Classification Desktop Application (COVID - Tuberculosis patient's CT/X-ray scan) </br>
 Model created with tensorflow, custom trained on Google Colab GPU </br>
 GUI made with PyQt5 </br>
 
